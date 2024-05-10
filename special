@@ -1,0 +1,84 @@
+#/bin/bash
+pacman -S xorg --noconfirm
+pacman -S xorg-apps --noconfirm
+pacman -S xorg-server --noconfirm
+pacman -S xorg-xinit --noconfirm
+pacman -S xorg-twm --noconfirm
+pacman -S xterm --noconfirm
+
+yay -S xfce4 --noeditmenu --noconfirm --needed
+yay -S xfce4-goodies --noeditmenu --noconfirm --needed
+yay -S network-manager-applet --noeditmenu --noconfirm --needed
+yay -S lightdm --noeditmenu --noconfirm --needed
+yay -S lightdm-gtk-greeter --noeditmenu --noconfirm --needed
+yay -S lightdm-gtk-greeter-settings --noeditmenu --noconfirm --needed
+yay -S light-locker --noeditmenu --noconfirm --needed
+yay -S accountsservice --noeditmenu --noconfirm --needed
+yay -S mugshot --noeditmenu --noconfirm --needed
+ 
+yay -S gnu-free-fonts --noeditmenu --noconfirm --needed
+yay -S ttf-hack --noeditmenu --noconfirm --needed
+yay -S ttf-inconsolata --noeditmenu --noconfirm --needed
+yay -S ttf-font-awesome --noeditmenu --noconfirm --needed
+yay -S awesome-terminal-fonts --noeditmenu --noconfirm --needed
+yay -S noto-fonts --noeditmenu --noconfirm --needed
+yay -S noto-fonts-emoji --noeditmenu --noconfirm --needed
+  
+yay -S ffmpegthumbs --noeditmenu --noconfirm --needed
+yay -S ffmpegthumbnailer --noeditmenu --noconfirm --needed
+yay -S freetype2 --noeditmenu --noconfirm --needed
+yay -S poppler-glib --noeditmenu --noconfirm --needed
+yay -S libgsf --noeditmenu --noconfirm --needed
+yay -S raw-thumbnailer --noeditmenu --noconfirm --needed
+yay -S libgsf --noeditmenu --noconfirm --needed
+
+systemctl enable lightdm
+
+yay -S plata-theme-bin --noeditmenu --noconfirm --needed
+yay -S papirus-icon-theme --noeditmenu --noconfirm --needed
+yay -S gtk-engine-murrine --noeditmenu --noconfirm --needed
+yay -S ttf-roboto --noeditmenu --noconfirm --needed
+yay -S pavucontrol --noeditmenu --noconfirm --needed
+yay -S gedit --noeditmenu --noconfirm --needed
+yay -S gedit-plugins --noeditmenu --noconfirm --needed
+yay -S plank --noeditmenu --noconfirm --needed
+yay -S plank-theme-namor --noeditmenu --noconfirm --needed
+
+yay -S android-file-transfer android-tools android-udev msmtp libmtp libcddb gvfs gvfs-afc gvfs-smb gvfs-gphoto2 gvfs-mtp gvfs-goa gvfs-nfs gvfs-google gst-libav dosfstools f2fs-tools ntfs-3g udftools nilfs-utils polkit gpart mtools cifs-utils --noeditmenu --noconfirm --needed
+yay -S wget unzip zip --noeditmenu --noconfirm --needed
+
+  clear
+
+wget https://raw.githubusercontent.com/CodigoCristo/themexfce4/master/configxfce4.zip -P /home/$USER/
+  # arch-chroot /mnt /bin/bash -c rm -r /home/$USER/.config
+  ls --all /home/$USER
+  echo 
+  sleep 10
+unzip -o /home/$USER/configxfce4.zip -d /home/$USER/
+rm /home/$USER/configxfce4.zip
+chown -R $USER:users /home/$USER/.config/
+  echo ""
+  sleep 10
+
+yay -S lightdm-webkit2-greeter --noeditmenu --noconfirm --needed
+
+wget https://raw.githubusercontent.com/CodigoCristo/themexfce4/master/glorius.zip -P /home/$USER/
+echo ""
+sleep 10
+unzip -o /home/$USER/glorius.zip -d /usr/share/lightdm-webkit/themes/
+rm /home/$USER/glorius.zip
+
+sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = glorious #\1/g' /mnt/etc/lightdm/lightdm-webkit2-greeter.conf
+sed -i 's/^debug_mode\s*=\s*\(.*\)/debug_mode = true #\1/g' /mnt/etc/lightdm/lightdm-webkit2-greeter.conf
+sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-webkit2-greeter/g' /mnt/etc/lightdm/lightdm.conf
+
+# Comprimir un directorio
+# zip sampleZipFile.zip -r /sampleZip/ExampleDir
+
+# para sobreescribir archivos
+# unzip -o sampleZipFile.zip 
+
+# Descomprimir un archivo a un directorio diferente
+# unzip sampleZipFile.zip -d /usr/sampleZip/ExampleDir
+
+  ;;
